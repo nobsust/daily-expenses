@@ -9,7 +9,7 @@
 
     <properties>
         <!-- the main verticle -->
-        <main.verticle>com.github.nobsust.dex.Server</main.verticle>
+        <main.verticle>com.github.nobsust.dex.core.Server</main.verticle>
     </properties>
 
     <dependencies>

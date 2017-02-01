@@ -1,5 +1,6 @@
-package com.github.nobsust.dex;
+package com.github.nobsust.dex.core;
 
+import com.github.nobsust.dex.api.ExpenseDto;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Future;
 import io.vertx.core.json.Json;
@@ -19,7 +20,7 @@ public class Server extends AbstractVerticle {
     private final int HTTP_PORT = Integer.valueOf(System.getenv("PORT"));
     private final String JSON_CONTENT_TYPE = "application/json; charset=utf-8";
 
-    private Map<Integer, Expense> expenses = new LinkedHashMap<>();
+    private Map<Integer, ExpenseDto> expenses = new LinkedHashMap<>();
 
     @Override
     public void start(Future<Void> future) throws Exception {
@@ -55,15 +56,13 @@ public class Server extends AbstractVerticle {
     }
 
     private void getAll(RoutingContext routingContext) {
-        /*Expense expense = new Expense(1, 1);
-        expenses.put(expense.getId(), expense);*/
         routingContext.response()
                 .putHeader("content-type", JSON_CONTENT_TYPE)
                 .end(Json.encodePrettily(expenses.values()));
     }
 
     private void addOne(RoutingContext routingContext) {
-        final Expense expense = Json.decodeValue(routingContext.getBodyAsString(), Expense.class);
+        final ExpenseDto expense = Json.decodeValue(routingContext.getBodyAsString(), ExpenseDto.class);
         expenses.put(expense.getId(), expense);
         routingContext.response()
                 .setStatusCode(201)
