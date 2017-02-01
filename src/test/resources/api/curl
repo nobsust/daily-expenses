@@ -1,0 +1,5 @@
+curl -i -H "Accept: application/json" -H "Content-Type: application/json" -X GET http://localhost:8080/api/info
+
+curl -i -H "Accept: application/json" -H "Content-Type: application/json" -X GET http://localhost:8080/api/expenses
+
+curl -H "Content-Type: application/json" -X POST -d '{"id":1,"amount":123}' http://localhost:8080/api/expenses
